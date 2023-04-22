@@ -1,0 +1,48 @@
+{% load static %}
+<div class="sticky-wrapper" style=""><div class="wrap-container sticky-header">
+   <div class="header-bottom">
+       <div class="container">
+           
+           <div class="header-center">
+               <nav class="main-nav">
+                   <ul class="menu sf-arrows sf-js-enabled" style="touch-action: pan-y;">
+                    {% for menu_list in menu %}
+                       <li>
+                           <a href="{% url 'category' menu_list.id %}" class="sf-with-ul">{{menu_list.menu_name}}</a>
+                           <div class="megamenu megamenu-sm" style="display: none;">
+                               <div class="row no-gutters">
+                                   <div class="col-md-6">
+                                       <div class="menu-col">
+                                           <ul>
+                                            {% for child in child_menu%}
+                                                {% if child.parent_menu %}
+                                                <li><a href="/category/{{ child.id }}">{{ child.menu_name }}</a></li>
+                                                {% endif %}
+                                            {% endfor %}
+                                           </ul>
+                                       </div><!-- End .menu-col -->
+                                   </div><!-- End .col-md-6 -->
+                               </div><!-- End .row -->
+                           </div><!-- End .megamenu megamenu-sm -->
+                       </li>
+                       {% endfor %}  
+                   </ul><!-- End .menu -->
+               </nav><!-- End .main-nav -->
+           </div><!-- End .header-left -->
+
+           <div class="header-right">
+               <div class="header-text">
+                   <ul class="top-menu top-link-menu">
+                       <li>
+                           <ul>
+                               <li><a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login / Registration</a></li>
+                           </ul>
+                       </li>
+                   </ul>
+               </div><!-- End .header-text -->
+           </div><!-- End .header-right -->
+       </div><!-- End .container -->
+   </div><!-- End .header-bottom -->
+</div></div><!-- End .wrap-container -->
+</header>
+

@@ -1,0 +1,18 @@
+{% include 'common/header.html' %}
+
+{% include 'common/menu.html' %}
+
+{% block title %}
+    <title>
+    {% for i in title %}
+        {{i.menu_name}}
+    {% endfor %}
+    </title>
+{% endblock %}
+
+{% block content %}
+
+
+{% endblock %}
+
+{% include 'common/footer.html' %}
