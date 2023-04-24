@@ -1,4 +1,6 @@
 {% load static %}
+{% load mptt_tags %}
+
 <div class="sticky-wrapper" style=""><div class="wrap-container sticky-header">
    <div class="header-bottom">
        <div class="container">
@@ -6,26 +8,25 @@
            <div class="header-center">
                <nav class="main-nav">
                    <ul class="menu sf-arrows sf-js-enabled" style="touch-action: pan-y;">
-                    {% for menu_list in menu %}
+                    {% recursetree menu %}
                        <li>
-                           <a href="{% url 'category' menu_list.id %}" class="sf-with-ul">{{menu_list.menu_name}}</a>
+                           <a href="{% url 'category' node.slug %}" class="sf-with-ul">{{ node.menu_name }}</a>
+                           {% if not node.is_leaf_node %}
                            <div class="megamenu megamenu-sm" style="display: none;">
                                <div class="row no-gutters">
                                    <div class="col-md-6">
                                        <div class="menu-col">
                                            <ul>
-                                            {% for child in child_menu%}
-                                                {% if child.parent_menu %}
-                                                <li><a href="/category/{{ child.id }}">{{ child.menu_name }}</a></li>
-                                                {% endif %}
-                                            {% endfor %}
+                                              <li><a href="{% url 'category' node.slug %}">{{ children }}</a></li>
                                            </ul>
                                        </div><!-- End .menu-col -->
                                    </div><!-- End .col-md-6 -->
                                </div><!-- End .row -->
                            </div><!-- End .megamenu megamenu-sm -->
+
+                           {% endif %}
                        </li>
-                       {% endfor %}  
+                       {% endrecursetree %} 
                    </ul><!-- End .menu -->
                </nav><!-- End .main-nav -->
            </div><!-- End .header-left -->
@@ -45,4 +46,3 @@
    </div><!-- End .header-bottom -->
 </div></div><!-- End .wrap-container -->
 </header>
-

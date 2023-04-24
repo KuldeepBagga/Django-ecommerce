@@ -6,6 +6,7 @@ from mptt.models import MPTTModel,TreeForeignKey
 class Menu(MPTTModel):
     menu_name=models.CharField(max_length=50,null=False)
     status=models.CharField(max_length=20,choices=[("active","Active"),("disable","Disable")],default="active")
+    slug=models.CharField(max_length=100,null=False,blank=False,unique=True)
     parent_menu=TreeForeignKey('self',on_delete=models.CASCADE,null=True,blank=True,related_name="children",default=0)
     
     class MPTTMeta:
